@@ -71,6 +71,30 @@ h2{font-size:28px;margin:60px 0 18px;letter-spacing:-.02em}
 footer{padding:50px 20px 40px;color:var(--mute);font-size:14px;text-align:center}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:12px;z-index:5;transition:transform .35s cubic-bezier(.2,.8,.2,1);font-size:14px}
 .toast.on{transform:translate(-50%,0)}
+.tg{display:inline-flex;align-items:center;gap:8px;background:#229ED9;color:#fff;font-weight:700;text-decoration:none;padding:13px 22px;border-radius:14px;margin-left:8px;box-shadow:0 10px 30px rgba(34,158,217,.35);transition:transform .2s}
+.tg:hover{transform:translateY(-3px) scale(1.03)}
+.tg svg{width:20px;height:20px;fill:#fff}
+.hr{display:flex;gap:10px;align-items:center}
+.ib{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font-size:17px;backdrop-filter:blur(8px)}
+.fab{position:fixed;right:18px;bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:6;width:58px;height:58px;border-radius:50%;background:#229ED9;display:grid;place-items:center;box-shadow:0 10px 30px rgba(34,158,217,.5);animation:float 3s ease-in-out infinite}
+.fab svg{width:28px;height:28px;fill:#fff}
+@keyframes float{50%{transform:translateY(-7px)}}
+.tools{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 18px}
+.in{flex:1;min-width:200px;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;backdrop-filter:blur(8px)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.mini{padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;font:inherit;font-size:14px;text-decoration:none}
+.mini:hover{border-color:var(--o);color:var(--o)}
+.chk{padding:18px 20px;margin-bottom:18px}
+.chk .row{margin-top:8px}
+#cres{margin:10px 0 0;font-weight:600}
+.ok{color:#2fbf71}.up{color:var(--o)}
+.chg{margin:0 0 14px;padding-left:18px;font-size:14px;color:var(--mute)}
+.chg li{margin:2px 0}
+.sha{font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;color:var(--mute);word-break:break-all;margin:0 0 12px}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:10px;backdrop-filter:blur(10px)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:8px 0 0;color:var(--mute);font-size:15px}
+.warn{display:none;margin:0 0 16px;padding:10px 14px;border-radius:12px;border:1px solid var(--o);color:var(--o);font-size:14px}
 @media (max-width:760px){.hero{grid-template-columns:1fr;text-align:left;min-height:auto}.stage{order:-1;height:300px}.scene{transform:scale(.8) rotateX(-18deg) rotateY(24deg)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -79,7 +103,7 @@ footer{padding:50px 20px 40px;color:var(--mute);font-size:14px;text-align:center
 <canvas id="fx" aria-hidden="true"></canvas>
 <header>
   <div class="brand"><b>MALAYALI</b> HERE</div>
-  <div class="pill"><i></i>Update server online</div>
+  <div class="hr"><div class="pill"><i></i>Update server online</div><button class="ib" id="tgl" aria-label="Toggle light or dark theme">◐</button></div>
 </header>
 <main>
   <section class="hero">
@@ -87,6 +111,7 @@ footer{padding:50px 20px 40px;color:var(--mute);font-size:14px;text-align:center
       <h1>MALAYALI <span>time fixer</span></h1>
       <p class="lead">Update hosting is ready. Download the latest APK, or check what changed in each build.</p>
       <a class="btn" href="#updates" id="latest">Get latest APK</a><a class="btn ghost" href="#install">How to install</a>
+      <a class="tg" href="https://t.me/MALAYALI7" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21.9 4.3 18.7 19.5c-.2 1-.9 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.6 13.3 2 11.9c-1-.3-1-1 .2-1.5L20.2 3.4c.9-.3 1.6.2 1.7.9z"/></svg>Chat on Telegram</a>
     </div>
     <div class="stage" id="stage" aria-hidden="true">
       <div class="scene" id="scene">
@@ -98,6 +123,10 @@ footer{padding:50px 20px 40px;color:var(--mute);font-size:14px;text-align:center
   </section>
 
   <h2 id="updates">Updates</h2>
+  <p class="warn" id="os">APK files install on Android only. Open this page on your Android phone.</p>
+  <div class="card chk"><h3 style="margin:0">Check for update</h3><p class="meta" style="margin:4px 0 0">Enter the version installed on your phone.</p>
+    <div class="row"><input class="in" id="cv" placeholder="e.g. 1.0.0" inputmode="decimal" aria-label="Installed version"><button class="btn" id="cb" style="padding:11px 20px">Check</button></div><p id="cres" role="status"></p></div>
+  <div class="tools"><input class="in" id="q" type="search" placeholder="Search versions or changes" aria-label="Search versions"></div>
   <div class="grid" id="list"></div>
 
   <h2 id="install">Install in 3 steps</h2>
@@ -106,14 +135,21 @@ footer{padding:50px 20px 40px;color:var(--mute);font-size:14px;text-align:center
     <div class="card"><h3>Allow install</h3><p>Turn on “Install unknown apps” for your browser when Android asks.</p></div>
     <div class="card"><h3>Open and update</h3><p>Install over the old version. Your data stays.</p></div>
   </div>
+
+  <h2>Questions</h2>
+  <details><summary>Is the APK safe?</summary><p>Yes. It is built and hosted by the owner. Compare the SHA-256 shown on each build to confirm your file is untouched.</p></details>
+  <details><summary>Android blocks the install</summary><p>Open Settings, search “Install unknown apps”, and allow it for the browser you downloaded with. Then open the file again.</p></details>
+  <details><summary>Will I lose my data when updating?</summary><p>No. Install the new APK over the old one. Do not uninstall first.</p></details>
+  <details><summary>Found a bug or need help?</summary><p>Message the owner on Telegram: <a href="https://t.me/MALAYALI7" target="_blank" rel="noopener" style="color:var(--o)">@MALAYALI7</a>.</p></details>
 </main>
-<footer>© MALAYALI HERE</footer>
+<footer>© MALAYALI HERE · Owner <a href="https://t.me/MALAYALI7" target="_blank" rel="noopener" style="color:var(--o)">@MALAYALI7</a></footer>
+<a class="fab" href="https://t.me/MALAYALI7" target="_blank" rel="noopener" aria-label="Message owner on Telegram"><svg viewBox="0 0 24 24"><path d="M21.9 4.3 18.7 19.5c-.2 1-.9 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.6 13.3 2 11.9c-1-.3-1-1 .2-1.5L20.2 3.4c.9-.3 1.6.2 1.7.9z"/></svg></a>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
 /* ADD NEW APKs HERE: newest first. file = path or URL of the .apk */
 const UPDATES=[
-  {v:"1.0.0",date:"Latest build",size:"— MB",file:"#",notes:"First hosted release.",latest:true}
+  {v:"1.0.0",date:"Latest build",size:"— MB",file:"#",notes:"First hosted release.",changes:["Time fix engine","Hosted update page"],sha:"",latest:true}
 ];
 
 const list=document.getElementById('list'),toast=document.getElementById('toast');
@@ -123,10 +159,39 @@ UPDATES.forEach(u=>{
   c.innerHTML='<span class="tag'+(u.latest?'':' old')+'">'+(u.latest?'Latest':'Older')+'</span><h3>Version '+u.v+'</h3><p class="meta">'+u.date+' · '+u.size+'</p><div class="bar"><i></i></div><p class="meta">'+u.notes+'</p>';
   const a=document.createElement('a');a.className='btn';a.textContent='Download APK';a.href=u.file;
   if(u.file==='#')a.onclick=e=>{e.preventDefault();say('Add the APK file path in UPDATES.')};
-  c.appendChild(a);list.appendChild(c);
+  c.dataset.s=(u.v+' '+u.notes+' '+(u.changes||[]).join(' ')).toLowerCase();
+  if(u.changes){const ul=document.createElement('ul');ul.className='chg';u.changes.forEach(t=>{const li=document.createElement('li');li.textContent=t;ul.appendChild(li)});c.insertBefore(ul,c.querySelector('.bar').nextSibling)}
+  if(u.sha){const s=document.createElement('p');s.className='sha';s.textContent='SHA-256 '+u.sha;c.appendChild(s)}
+  const r=document.createElement('div');r.className='row';r.style.marginTop='12px';
+  const cp=document.createElement('button');cp.className='mini';cp.textContent='Copy link';
+  cp.onclick=()=>{const L=new URL(u.file,location.href).href;(navigator.clipboard?navigator.clipboard.writeText(L):Promise.reject()).then(()=>say('Link copied'),()=>say(L))};
+  const sh=document.createElement('button');sh.className='mini';sh.textContent='Share';
+  sh.onclick=()=>{const d={title:'MALAYALI time fixer '+u.v,url:location.href};navigator.share?navigator.share(d).catch(()=>{}):say('Sharing not supported here')};
+  r.append(cp,sh);
+  const wrap=document.createElement('div');wrap.className='row';wrap.append(a);
+  c.append(wrap,r);list.appendChild(c);
   setTimeout(()=>c.querySelector('.bar i').style.width=u.latest?'100%':'60%',400);
 });
 
+/* theme toggle */
+const RT=document.documentElement;
+try{const s=localStorage.getItem('mh-theme');if(s)RT.dataset.theme=s}catch(e){}
+document.getElementById('tgl').onclick=()=>{
+  const dark=RT.dataset.theme?RT.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  RT.dataset.theme=dark?'light':'dark';try{localStorage.setItem('mh-theme',RT.dataset.theme)}catch(e){}};
+/* search */
+document.getElementById('q').oninput=e=>{const v=e.target.value.trim().toLowerCase();
+  list.querySelectorAll('.card').forEach(c=>c.style.display=!v||c.dataset.s.includes(v)?'':'none')};
+/* update checker */
+function cmp(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<Math.max(x.length,y.length);i++){const d=(x[i]||0)-(y[i]||0);if(d)return d>0?1:-1}return 0}
+document.getElementById('cb').onclick=()=>{
+  const v=document.getElementById('cv').value.trim().replace(/^v/i,''),o=document.getElementById('cres');
+  if(!/^\d+(\.\d+)*$/.test(v)){o.className='';o.textContent='Enter a version like 1.0.0';return}
+  const L=UPDATES[0].v,c=cmp(v,L);
+  if(c<0){o.className='up';o.textContent='Update available: version '+L}
+  else{o.className='ok';o.textContent='You are on the latest version'}};
+/* android notice */
+if(!/Android/i.test(navigator.userAgent))document.getElementById('os').style.display='block';
 /* 3D tilt on cards */
 document.addEventListener('pointermove',e=>{
   const c=e.target.closest&&e.target.closest('.card');
