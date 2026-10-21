@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MALAYALI App Updates</title>
+<style>
+:root{
+  --bg:#f6f1ea;--bg2:#ece3d6;--ink:#241a10;--mute:#6f5f4d;--card:rgba(255,255,255,.7);--line:rgba(36,26,16,.14);
+  --o:#FF8C00;--o2:#ffb347;--glow:rgba(255,140,0,.35);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#150e07;--bg2:#21150a;--ink:#fbeedd;--mute:#b79d82;--card:rgba(40,26,14,.62);--line:rgba(255,200,140,.16);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#150e07;--bg2:#21150a;--ink:#fbeedd;--mute:#b79d82;--card:rgba(40,26,14,.62);--line:rgba(255,200,140,.16);color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(120% 80% at 50% 0%,var(--bg2),var(--bg));color:var(--ink);
+  font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;overflow-x:hidden;min-height:100vh}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main,header,footer{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding-top:22px;padding-bottom:6px}
+.brand{font-weight:800;letter-spacing:.04em;font-size:15px}
+.brand b{color:var(--o)}
+.pill{font-size:13px;color:var(--mute);border:1px solid var(--line);padding:6px 12px;border-radius:999px;background:var(--card);backdrop-filter:blur(8px)}
+.pill i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#3ddc84;margin-right:8px;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(61,220,132,0);opacity:.6}}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;min-height:78vh;padding-top:24px}
+h1{font-size:clamp(40px,7vw,84px);line-height:.98;margin:0 0 18px;letter-spacing:-.03em;font-weight:800}
+h1 span{display:block;background:linear-gradient(100deg,var(--o),var(--o2),var(--o));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 5s linear infinite}
+@keyframes sheen{to{background-position:-200% 0}}
+.lead{color:var(--mute);max-width:46ch;margin:0 0 26px}
+.btn{display:inline-block;background:var(--o);color:#1b1003;font-weight:700;text-decoration:none;padding:13px 24px;border-radius:14px;border:0;cursor:pointer;font-size:15px;
+  box-shadow:0 10px 30px var(--glow),inset 0 -3px 0 rgba(0,0,0,.18);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 40px var(--glow),inset 0 -3px 0 rgba(0,0,0,.18)}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--o2);outline-offset:3px}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none;margin-left:8px}
+/* 3D clock stage */
+.stage{perspective:1000px;height:min(420px,80vw);display:grid;place-items:center}
+.scene{position:relative;width:260px;height:260px;transform-style:preserve-3d;transform:rotateX(var(--rx,-18deg)) rotateY(var(--ry,24deg));transition:transform .15s ease-out}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--o);transform-style:preserve-3d;box-shadow:0 0 26px var(--glow),inset 0 0 26px var(--glow)}
+.r1{animation:spinY 14s linear infinite}
+.r2{inset:22px;border-color:var(--o2);animation:spinX 10s linear infinite}
+.r3{inset:46px;border-style:dashed;animation:spinZ 18s linear infinite reverse}
+@keyframes spinY{to{transform:rotateY(360deg)}}
+@keyframes spinX{to{transform:rotateX(360deg)}}
+@keyframes spinZ{to{transform:rotateZ(360deg)}}
+.core{position:absolute;left:50%;top:50%;width:92px;height:92px;margin:-46px;transform-style:preserve-3d;animation:cube 9s linear infinite}
+@keyframes cube{to{transform:rotateX(360deg) rotateY(360deg)}}
+.f{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:30px;color:#1b1003;
+  background:linear-gradient(135deg,var(--o2),var(--o));border:1px solid rgba(255,255,255,.4);box-shadow:0 0 30px var(--glow);border-radius:10px}
+.f:nth-child(1){transform:translateZ(46px)}.f:nth-child(2){transform:rotateY(180deg) translateZ(46px)}
+.f:nth-child(3){transform:rotateY(90deg) translateZ(46px)}.f:nth-child(4){transform:rotateY(-90deg) translateZ(46px)}
+.f:nth-child(5){transform:rotateX(90deg) translateZ(46px)}.f:nth-child(6){transform:rotateX(-90deg) translateZ(46px)}
+.hand{position:absolute;left:50%;top:50%;width:3px;height:110px;margin-left:-1.5px;background:var(--ink);border-radius:3px;transform-origin:50% 100%;translate:0 -100%;opacity:.8}
+/* cards */
+h2{font-size:28px;margin:60px 0 18px;letter-spacing:-.02em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;perspective:1100px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;backdrop-filter:blur(12px);transform-style:preserve-3d;
+  transition:transform .18s ease-out,border-color .2s;will-change:transform}
+.card:hover{border-color:var(--o)}
+.card>*{transform:translateZ(26px)}
+.card h3{margin:0 0 4px;font-size:19px}
+.tag{display:inline-block;font-size:12px;font-weight:700;background:var(--o);color:#1b1003;border-radius:8px;padding:2px 9px;margin-bottom:10px}
+.tag.old{background:transparent;color:var(--mute);border:1px solid var(--line)}
+.meta{color:var(--mute);font-size:14px;margin:0 0 14px}
+.bar{height:6px;border-radius:6px;background:var(--line);overflow:hidden;margin:0 0 16px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--o),var(--o2));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:6px}
+.how .card p{margin:6px 0 0;color:var(--mute);font-size:15px}
+footer{padding:50px 20px 40px;color:var(--mute);font-size:14px;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:12px;z-index:5;transition:transform .35s cubic-bezier(.2,.8,.2,1);font-size:14px}
+.toast.on{transform:translate(-50%,0)}
+@media (max-width:760px){.hero{grid-template-columns:1fr;text-align:left;min-height:auto}.stage{order:-1;height:300px}.scene{transform:scale(.8) rotateX(-18deg) rotateY(24deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<header>
+  <div class="brand"><b>MALAYALI</b> HERE</div>
+  <div class="pill"><i></i>Update server online</div>
+</header>
+<main>
+  <section class="hero">
+    <div>
+      <h1>MALAYALI <span>time fixer</span></h1>
+      <p class="lead">Update hosting is ready. Download the latest APK, or check what changed in each build.</p>
+      <a class="btn" href="#updates" id="latest">Get latest APK</a><a class="btn ghost" href="#install">How to install</a>
+    </div>
+    <div class="stage" id="stage" aria-hidden="true">
+      <div class="scene" id="scene">
+        <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+        <div class="core"><div class="f">M</div><div class="f">H</div><div class="f">M</div><div class="f">H</div><div class="f">⏱</div><div class="f">⏱</div></div>
+        <div class="hand" id="hs"></div><div class="hand" id="hm" style="height:80px;width:4px;background:var(--o)"></div>
+      </div>
+    </div>
+  </section>
+
+  <h2 id="updates">Updates</h2>
+  <div class="grid" id="list"></div>
+
+  <h2 id="install">Install in 3 steps</h2>
+  <div class="how">
+    <div class="card"><h3>Download</h3><p>Tap the APK button on the latest build.</p></div>
+    <div class="card"><h3>Allow install</h3><p>Turn on “Install unknown apps” for your browser when Android asks.</p></div>
+    <div class="card"><h3>Open and update</h3><p>Install over the old version. Your data stays.</p></div>
+  </div>
+</main>
+<footer>© MALAYALI HERE</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ADD NEW APKs HERE: newest first. file = path or URL of the .apk */
+const UPDATES=[
+  {v:"1.0.0",date:"Latest build",size:"— MB",file:"#",notes:"First hosted release.",latest:true}
+];
+
+const list=document.getElementById('list'),toast=document.getElementById('toast');
+function say(t){toast.textContent=t;toast.classList.add('on');clearTimeout(say.t);say.t=setTimeout(()=>toast.classList.remove('on'),2400)}
+UPDATES.forEach(u=>{
+  const c=document.createElement('article');c.className='card';
+  c.innerHTML='<span class="tag'+(u.latest?'':' old')+'">'+(u.latest?'Latest':'Older')+'</span><h3>Version '+u.v+'</h3><p class="meta">'+u.date+' · '+u.size+'</p><div class="bar"><i></i></div><p class="meta">'+u.notes+'</p>';
+  const a=document.createElement('a');a.className='btn';a.textContent='Download APK';a.href=u.file;
+  if(u.file==='#')a.onclick=e=>{e.preventDefault();say('Add the APK file path in UPDATES.')};
+  c.appendChild(a);list.appendChild(c);
+  setTimeout(()=>c.querySelector('.bar i').style.width=u.latest?'100%':'60%',400);
+});
+
+/* 3D tilt on cards */
+document.addEventListener('pointermove',e=>{
+  const c=e.target.closest&&e.target.closest('.card');
+  document.querySelectorAll('.card').forEach(x=>{if(x!==c)x.style.transform=''});
+  if(c){const r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+    c.style.transform='rotateY('+px*14+'deg) rotateX('+(-py*14)+'deg) translateZ(8px)'}
+});
+document.addEventListener('pointerleave',()=>document.querySelectorAll('.card').forEach(x=>x.style.transform=''));
+
+/* scene follows pointer */
+const sc=document.getElementById('scene');
+addEventListener('pointermove',e=>{
+  sc.style.setProperty('--ry',(24+(e.clientX/innerWidth-.5)*50)+'deg');
+  sc.style.setProperty('--rx',(-18-(e.clientY/innerHeight-.5)*40)+'deg')});
+
+/* live clock hands */
+const hs=document.getElementById('hs'),hm=document.getElementById('hm');
+(function t(){const d=new Date();
+  hs.style.transform='rotate('+(d.getSeconds()+d.getMilliseconds()/1000)*6+'deg)';
+  hm.style.transform='rotate('+(d.getMinutes()+d.getSeconds()/60)*6+'deg)';
+  requestAnimationFrame(t)})();
+
+/* 3D particle tunnel */
+const cv=document.getElementById('fx'),x=cv.getContext('2d');let W,H,P=[];
+function rs(){W=cv.width=innerWidth*devicePixelRatio;H=cv.height=innerHeight*devicePixelRatio}
+addEventListener('resize',rs);rs();
+for(let i=0;i<170;i++)P.push({x:(Math.random()-.5)*2200,y:(Math.random()-.5)*2200,z:Math.random()*1000});
+let mx=0,my=0;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+(function f(){
+  x.clearRect(0,0,W,H);
+  for(const p of P){
+    p.z-=2.2;if(p.z<=1){p.z=1000;p.x=(Math.random()-.5)*2200;p.y=(Math.random()-.5)*2200}
+    const k=500/p.z,sx=W/2+(p.x-mx*400)*k*devicePixelRatio,sy=H/2+(p.y-my*400)*k*devicePixelRatio;
+    const s=Math.max(.4,(1-p.z/1000)*3.2)*devicePixelRatio;
+    x.fillStyle='rgba(255,'+(140+Math.floor((1-p.z/1000)*80))+',40,'+(1-p.z/1000)*.8+')';
+    x.beginPath();x.arc(sx,sy,s,0,6.283);x.fill();
+  }
+  requestAnimationFrame(f)})();
+</script>
+</body>
+</html>
