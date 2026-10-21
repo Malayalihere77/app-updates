@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "versionCode": 65,
+  "versionName": "4.0.2-malayali.15",
+  "releaseNumber": 15,
+  "releasedAt": "2026-10-21",
+  "apkUrl": "https://github.com/Malayalihere77/app-updates/releases/download/v15/MALAYALI-time-fixer-v15.apk",
+  "sizeBytes": 3979874,
+  "sha256": "d6ff8a69a51129f51b52c169c897beace04a19a9af1624f78c6f8b70c85cbaa7",
+  "notes": "Online update checks on app open. Manual Check for updates button. Existing firewall and floating controls retained.",
+  "changes": [
+    "Checks the update feed when the app opens",
+    "Check for updates button on the home screen",
+    "Update now / Later prompt for newer releases",
+    "Keeps existing firewall and floating controls"
+  ]
+}
