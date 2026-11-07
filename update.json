@@ -1,17 +1,14 @@
 {
   "schemaVersion": 1,
-  "versionCode": 65,
-  "versionName": "4.0.2-malayali.15",
-  "releaseNumber": 15,
-  "releasedAt": "2026-10-21",
-  "apkUrl": "https://github.com/Malayalihere77/app-updates/releases/download/v15/MALAYALI-time-fixer-v15.apk",
-  "sizeBytes": 3979874,
-  "sha256": "d6ff8a69a51129f51b52c169c897beace04a19a9af1624f78c6f8b70c85cbaa7",
-  "notes": "Online update checks on app open. Manual Check for updates button. Existing firewall and floating controls retained.",
+  "versionCode": 70,
+  "versionName": "4.0.2-malayali.20",
+  "releaseNumber": 20,
+  "releasedAt": "2026-11-07",
+  "apkUrl": "https://github.com/Malayalihere77/app-updates/releases/download/v20/MALAYALI-time-fixer-v20.apk",
+  "sizeBytes": 12328682,
+  "sha256": "d05beed7911d6ec1dd3407764f0dc81b38a5d0b74474a6b7a48e9d5b6ffc27dd",
+  "notes": "New KERALA app icon and MALAYALI HERE floating logo. Updates now use Malayalihere77/app-updates. Install V20 once manually if your current app checks the old repository; future published updates will appear in this app. Android installation confirmation is required. Build and signing checks passed; phone testing has not been performed.",
   "changes": [
-    "Checks the update feed when the app opens",
-    "Check for updates button on the home screen",
-    "Update now / Later prompt for newer releases",
-    "Keeps existing firewall and floating controls"
+    "New KERALA app icon and MALAYALI HERE floating logo. Updates now use Malayalihere77/app-updates. Install V20 once manually if your current app checks the old repository; future published updates will appear in this app. Android installation confirmation is required. Build and signing checks passed; phone testing has not been performed."
   ]
 }
