@@ -1,0 +1,34 @@
+name: Update APK feed
+on:
+  release:
+    types: [published, edited]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: apk-update-feed
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install androguard==4.1.3
+      - name: Read published APK and update metadata
+        run: python scripts/update_feed.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Save update feed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add update.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update APK release metadata'
+            git push origin HEAD:main
+          fi
