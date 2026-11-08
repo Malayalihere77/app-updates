@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "versionCode": 70,
-  "versionName": "4.0.2-malayali.20",
-  "releaseNumber": 20,
-  "releasedAt": "2026-11-07",
-  "apkUrl": "https://github.com/Malayalihere77/app-updates/releases/download/v20/MALAYALI-time-fixer-v20.apk",
-  "sizeBytes": 12328682,
-  "sha256": "d05beed7911d6ec1dd3407764f0dc81b38a5d0b74474a6b7a48e9d5b6ffc27dd",
-  "notes": "New KERALA app icon and MALAYALI HERE floating logo. Updates now use Malayalihere77/app-updates. Install V20 once manually if your current app checks the old repository; future published updates will appear in this app. Android installation confirmation is required. Build and signing checks passed; phone testing has not been performed.",
+  "versionCode": 72,
+  "versionName": "4.0.2-malayali.22",
+  "releaseNumber": 22,
+  "releasedAt": "2026-11-08",
+  "apkUrl": "https://github.com/Malayalihere77/app-updates/releases/download/v22/MALAYALI-time-fixer-v22.apk",
+  "sizeBytes": 12988287,
+  "sha256": "6bd3d090adbf25bf18afd13ff132e5521332ab566e48d106ecde8699d672d908",
+  "notes": "V22 update for existing users: transparent crest app icon, new front-window logo, and direct update downloads. Upgrading migrates future update checks to the download-only service. Build/signature verified; phone testing pending.",
   "changes": [
-    "New KERALA app icon and MALAYALI HERE floating logo. Updates now use Malayalihere77/app-updates. Install V20 once manually if your current app checks the old repository; future published updates will appear in this app. Android installation confirmation is required. Build and signing checks passed; phone testing has not been performed."
+    "V22 update for existing users: transparent crest app icon, new front-window logo, and direct update downloads. Upgrading migrates future update checks to the download-only service. Build/signature verified; phone testing pending."
   ]
 }
