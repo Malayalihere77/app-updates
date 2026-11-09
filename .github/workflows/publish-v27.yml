@@ -1,0 +1,50 @@
+name: Publish V27 APK and update feed
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'distribution/BGMI-Time-Fixer-v27.apk'
+      - '.github/workflows/publish-v27.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: apk-update-feed
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify release APK
+        run: |
+          echo '3361db16d0c8aa44da7ccc638375242b69dd98041fccc14b7de16c72d911cd0f  distribution/BGMI-Time-Fixer-v27.apk' | sha256sum --check
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v27 >/dev/null 2>&1; then
+            gh release upload v27 distribution/BGMI-Time-Fixer-v27.apk --clobber
+            gh release edit v27 --draft=false --latest --title "BGMI Time Fixer V27" --notes-file distribution/v27-notes.txt
+          else
+            gh release create v27 distribution/BGMI-Time-Fixer-v27.apk --target "$GITHUB_SHA" --latest --title "BGMI Time Fixer V27" --notes-file distribution/v27-notes.txt
+          fi
+      - run: pip install androguard==4.1.3
+      - name: Update app metadata
+        run: python scripts/update_feed.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Save update feed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add update.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Publish V27 update feed'
+            git push origin HEAD:main
+          fi
