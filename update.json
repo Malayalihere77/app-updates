@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "versionCode": 72,
-  "versionName": "4.0.2-malayali.22",
-  "releaseNumber": 22,
-  "releasedAt": "2026-11-08",
-  "apkUrl": "https://github.com/Malayalihere77/app-updates/releases/download/v22/MALAYALI-time-fixer-v22.apk",
-  "sizeBytes": 12988287,
-  "sha256": "6bd3d090adbf25bf18afd13ff132e5521332ab566e48d106ecde8699d672d908",
-  "notes": "V22 update for existing users: transparent crest app icon, new front-window logo, and direct update downloads. Upgrading migrates future update checks to the download-only service. Build/signature verified; phone testing pending.",
+  "versionCode": 77,
+  "versionName": "4.0.2-malayali.27",
+  "releaseNumber": 27,
+  "releasedAt": "2026-11-09",
+  "apkUrl": "https://github.com/Malayalihere77/app-updates/releases/download/v27/BGMI-Time-Fixer-v27.apk",
+  "sizeBytes": 13249991,
+  "sha256": "3361db16d0c8aa44da7ccc638375242b69dd98041fccc14b7de16c72d911cd0f",
+  "notes": "V27: New HTML dashboard, bilingual tutorial with UI images, 12-hour clock, one-button activation controls, and refreshed black/red branding. The side menu shows the Malayali Here logo above Telegram Channel and Support links. Existing app rules, logs and floating controls retained. Build and matching signing certificate verified; device runtime testing pending. Tap the completed APK download notification to install the update.",
   "changes": [
-    "V22 update for existing users: transparent crest app icon, new front-window logo, and direct update downloads. Upgrading migrates future update checks to the download-only service. Build/signature verified; phone testing pending."
+    "V27: New HTML dashboard, bilingual tutorial with UI images, 12-hour clock, one-button activation controls, and refreshed black/red branding. The side menu shows the Malayali Here logo above Telegram Channel and Support links. Existing app rules, logs and floating controls retained. Build and matching signing certificate verified; device runtime testing pending. Tap the completed APK download notification to install the update."
   ]
 }
